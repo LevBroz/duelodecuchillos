@@ -1,0 +1,21 @@
+# Blueprint de Render para el servidor de Duelo de Cuchillos.
+# No usa rootDir para que el build tenga acceso a /shared (se importa con ../shared).
+services:
+  - type: web
+    name: duelo-de-cuchillos-server
+    runtime: node
+    plan: free
+    buildCommand: npm ci --prefix server --omit=dev
+    startCommand: node server/src/index.js
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Render asigna PORT automáticamente; este valor es el que usa por defecto.
+      - key: PORT
+        value: "10000"
+      # URL exacta del sitio en Netlify, sin "/" al final. Se completa en el panel.
+      # Varias separadas por coma; se permiten comodines: https://*--tu-sitio.netlify.app
+      - key: CLIENT_ORIGIN
+        sync: false

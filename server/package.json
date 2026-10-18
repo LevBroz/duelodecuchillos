@@ -1,0 +1,24 @@
+{
+  "name": "duelo-server",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "socket.io": "^4.8.4"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.4",
+    "vitest": "^5.0.5"
+  }
+}

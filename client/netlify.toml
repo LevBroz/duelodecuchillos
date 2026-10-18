@@ -1,0 +1,21 @@
+# Netlify: configurar "Base directory" = client en el sitio.
+# El build importa ../shared, que está en el mismo repositorio (Netlify clona todo el repo).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # VITE_SERVER_URL se define en el panel de Netlify (URL del servicio en Render).
+
+# Los assets llevan hash en el nombre: se pueden cachear para siempre.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
